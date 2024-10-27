@@ -33,19 +33,9 @@ def train(args):
     val_data = data_dict['val_data']
     num_train = data_dict['num_train']
     num_val = data_dict['num_val']
-    
-    # for visualizing token embeddings (not used anymore)
-    # x_words = data_dict['x_words']
-    # y_words = data_dict['y_words']
-    # z_words = data_dict['z_words']
 
     train_loader = DataLoader(train_data, batch_size=args.batch_size, shuffle=True)
     val_loader = DataLoader(val_data, batch_size=args.batch_size, shuffle=True)
-
-    # debug
-    # print("train:", [x.tolist() for x in train_loader])
-    # print("val:", [x.tolist() for x in val_loader])
-    # input()
 
     # Instantiating a GPT2 model with fresh intialized weights 
     # expand vocab size by 2, to accomadate for left, right arrow tokens

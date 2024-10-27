@@ -92,10 +92,6 @@ def train(args):
             train_word_probs_per_batch.append(np.mean(word_probs))          # take average within batch
             train_token_probs_per_batch.append(np.mean(token_prob))
 
-            # print("last word probs:", last_word_probs)
-            # print(type(last_word_probs))
-            # input()
-
             loss = outputs.loss
             loss.backward()
             optimizer.step()
@@ -128,10 +124,6 @@ def train(args):
         
         val_word_probs.append(np.mean(val_word_probs_per_batch))
         val_token_probs.append(np.mean(val_token_probs_per_batch))
-
-        # print(epoch)
-        # print(val_token_probs_per_batch)
-        # print(val_token_probs)
 
         # For plotting the evolution of heatmap as training progresses (embeddings should approach near-orthogonal)
 

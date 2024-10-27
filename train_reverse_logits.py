@@ -36,11 +36,6 @@ def train(arg):
     train_loader = DataLoader(train_data, batch_size=args.batch_size, shuffle=True)
     val_loader = DataLoader(val_data, batch_size=args.batch_size, shuffle=True)
 
-    # debug
-    # print("train:", [x.tolist() for x in train_loader])
-    # print("val:", [x.tolist() for x in val_loader])
-    # input()
-
     # Instantiating a GPT2 model with fresh intialized weights 
     # expand vocab size by 2, to accomadate for left, right arrow tokens
     config = GPT2Config(
@@ -82,10 +77,6 @@ def train(arg):
             # probs for all samples in current batch
             train_word_probs_per_batch.append(np.mean(word_probs))          # take average within batch
             train_token_probs_per_batch.append(np.mean(token_prob))
-
-            # print("last word probs:", last_word_probs)
-            # print(type(last_word_probs))
-            # input()
 
             loss = outputs.loss
             loss.backward()
@@ -231,27 +222,6 @@ def train(arg):
             selected_logits = [logits_vec[x] for x in val_unseen_output_tokens]           # M x M 
             selected_logits_batch.append(selected_logits)
         val_logits_unseen.extend(selected_logits_batch)
-
-    # Debug: also input the sentences from val_loader_seen (append to 'val unseen direction' matrix)
-    # for sentence_batch in val_loader_seen:
-    #     with torch.no_grad():
-    #         outputs, additional_out_dict = model(
-    #             input_ids=sentence_batch, 
-    #             labels=sentence_batch, 
-    #             word_size=args.word_size,
-    #             pos_encode_type=args.pos_encode_type,
-    #             return_logits=True
-    #         )
-
-    #     logits_batch = additional_out_dict['logits']                            # M x |V| where M = len(train_tokens_y)
-            
-    #     selected_logits_batch = []
-    #     for logits_vec in logits_batch:
-    #         logits_vec = logits_vec.detach().cpu().numpy()
-    #         selected_logits = [logits_vec[x] for x in val_unseen_output_tokens] # debug: input in val seen tokens, but still select the output logits corresponding to val unseen output tokens
-    #         selected_logits_batch.append(selected_logits)
-    #     val_logits_unseen.extend(selected_logits_batch)
-    # END debug
 
     val_logits_unseen = np.array(val_logits_unseen)
     print('val logits unseen:', val_logits_unseen.shape)

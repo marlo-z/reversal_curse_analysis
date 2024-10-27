@@ -139,15 +139,6 @@ def generate_reverse_dataset(
         train_sentences = np.array(train_sentences)
 
 
-    # ### debugging 2
-    # for train_sentence in train_sentences:
-    #     # pop forward from val --> add to train
-    #     if np.random.randint(2): # random 0 or 1
-    #         train_sentence.pop('forward')
-    #     # pop backward from val --> add to train
-    #     else:
-    #         train_sentence.pop('backward')
-
     num_train = sum([len(entry) for entry in train_sentences])
     num_val = sum([len(entry) for entry in val_sentences])
     # print("After moving half of val to train")

@@ -37,24 +37,13 @@ def create_forward_with_rotary_pe(rotary_embed):
         # Split into 12 heads (config.n_head)
         # K,Q,V: [batch_size, n_heads, n_tokens, embed_dim / n_heads] = [B, 12, N, 64]
 
-        # print("K, Q, V")
-        # print(query.size(), key.size(), value.size())
-
         query = self._split_heads(query, self.num_heads, self.head_dim)
         key = self._split_heads(key, self.num_heads, self.head_dim)
         value = self._split_heads(value, self.num_heads, self.head_dim)
-        
-        # print("split heads")
-        # print(query.size(), key.size(), value.size())
 
         # add rotary positional embedding to queries and keys
         query = rotary_embed.rotate_queries_or_keys(query)
         key = rotary_embed.rotate_queries_or_keys(key) 
-        # Source code:
-        # ~/miniconda3/envs/reverse_curse/lib/python3.10/site-packages/rotary_embedding_torch/rotary_embedding_torch.py
-
-        # print("Added Rotary PE:")
-        # print(query.size(), key.size(), value.size())
 
         if layer_past is not None:
             past_key, past_value = layer_past

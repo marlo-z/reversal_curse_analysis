@@ -14,8 +14,8 @@ This repo contains the code for the experiments in our [paper](https://arxiv.org
 
 ## Installation
 ```sh
-conda create -n reverse_curse python=3.10
-conda activate reverse_curse
+conda create -n reversal_curse python=3.10
+conda activate reversal_curse
 pip install -r requirements.txt
 ```
 

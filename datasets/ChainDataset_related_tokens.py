@@ -91,13 +91,6 @@ def generate_chain_dataset_v2(
     #       num_val_sentence   = num_val_triples
 
 
-    # from pprint import pprint
-    # print("train:")
-    # pprint(train_sentences)
-    # print("val:")
-    # pprint(val_sentences)
-    # input()
-
     train_data = ChainDataset_v2(train_sentences, device)
     val_data = ChainDataset_v2(val_sentences, device)
 

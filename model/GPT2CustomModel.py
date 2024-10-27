@@ -309,7 +309,6 @@ class GPT2CustomLMHeadModel(GPT2LMHeadModel):
             # Softmax logits into probability vector (only plot probs of last word)
             batch_probs_vec = F.softmax(last_word_logits, dim=-1).detach()              # B x k x |V|, softmax along |V| dim
             
-            # Debug:
             # print("shift_logits:", shift_logits.size())                 # whole sequence (B x L-1 x |V|)
             # print("shift_labesl:", shift_labels.size()) 
             # print("last_word_logits:", last_word_logits.size())         # last word      (B x k x |V|)
