@@ -25,46 +25,46 @@ pip install -r requirements.txt
 
 To run the standard reversal logic experiment of the form $A_i \rightarrow B_i$ and $B_i \leftarrow A_i$ and plot training and validation log probabilities:
 ```sh
-CUDA_VISIBLE_DEVICES=0 python3 train_reverse.py
+CUDA_VISIBLE_DEVICES=0 python3 -m src.scripts.train_reverse
 ```
 
 To run the standard reversal logic experiment of the form $A_i \rightarrow B_i$ and $B_i \leftarrow A_i$ and visualize the logits of token $A_i$ given $B_i$ and the logits of $B_i$ given $A_i$:
 ```sh
-CUDA_VISIBLE_DEVICES=0 python3 train_reverse_logits.py
+CUDA_VISIBLE_DEVICES=0 python3 -m src.scripts.train_reverse_logits
 ```
 
 To run the standard reversal logic experiment of the form $A_i \rightarrow B_i$ and $B_i \leftarrow A_i$ and visualize cosine similarity between embedding vectors of tokens $A_i$ and $B_i$:
 ```sh
-CUDA_VISIBLE_DEVICES=0 python3 train_reverse_embed.py
+CUDA_VISIBLE_DEVICES=0 python3 -m src.scripts.train_reverse_embed
 ```
 
 To run the reversal logic experiment with In-Context Learning of the form $A_i R B_i \Longleftrightarrow B_i R^{-1} A_i$ and and plot training and validation log probabilities:
 ```sh
-CUDA_VISIBLE_DEVICES=0 python3 train_reverse_ICL.py
+CUDA_VISIBLE_DEVICES=0 python3 -m src.scripts.train_reverse_ICL
 ```
 
 ### Chain-of-Thought Experiments
 
 To run the standard Chain-of-Thought experiment of the form $A_i \rightarrow B_i$, $B_i \rightarrow C_i$, $A_i \leadsto C_i$ and plot the training and validation probabilities:
 ```sh
-CUDA_VISIBLE_DEVICES=0 python3 train_chain.py
+CUDA_VISIBLE_DEVICES=0 python3 -m src.scripts.train_chain
 ```
 
 To run the standard Chain-of-Thought experiment of the form $A_i \rightarrow B_i$, $B_i \rightarrow C_i$, $A_i \leadsto C_i$ and visualize the logits of tokens 1) $B_i$ given $A_i$, 2) $C_i$ given $B_i$ and 3) $C_i$ given $A_i$:
 ```sh
-CUDA_VISIBLE_DEVICES=0 python3 train_reverse_logits.py
+CUDA_VISIBLE_DEVICES=0 python3 -m src.scripts.train_reverse_logits
 ```
 
 To run the alternative version of Chain-of-Thought experiment with correlated tokens of the form $Ai \rightarrow Bi$, $Bi \rightarrow Ci$, $Ai \leadsto Ci$, where each entity is comprised of 2 tokens with $A,B,C$ tokens fixed and plot the training and validation probabilities:
 ```sh
-CUDA_VISIBLE_DEVICES=0 python3 train_chain_related_tokens.py
+CUDA_VISIBLE_DEVICES=0 python3 -m src.scripts.train_chain_related_tokens
 ```
 
 ### Command Line Arguments
 
 When running the scripts for each experiment, there are several command line argument that can be passed to customize model configuration, training hyperparameters and dataset generation. The following example demonstrates how these arguments can be passed via command line, and their respective default values:
 ```
-CUDA_VISIBLE_DEVICES=0 python3 train_reverse.py \
+CUDA_VISIBLE_DEVICES=0 python3 -m src.scripts.train_reverse \
     --pos_encode_type 'absolute' \      # positional embedding: 'null', 'absolute', 'rotary'
     --n_layers 24 \                     # number of transformer layers
     --embed_dim 768 \                   # dimension of the token embedding vectors
